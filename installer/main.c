@@ -51,6 +51,18 @@ extern int size_opl_elf;
 extern u8 ule_elf[];
 extern int size_ule_elf;
 //----------------------------------------//
+extern u8 pops_icn[];
+extern int size_pops_icn;
+//----------------------------------------//
+extern u8 pops_sys[];
+extern int size_pops_sys;
+//----------------------------------------//
+extern u8 pops_usbd[];
+extern int size_pops_usbd;
+//----------------------------------------//
+extern u8 pops_usbhdfsd[];
+extern int size_pops_usbhdfsd;
+//----------------------------------------//
 
 static int pad_inited = 0;
 #include "FUNTUNA_FORK_INSTALLER_BG.h"
@@ -439,28 +451,37 @@ static int install(int mcport, int icon_variant)
 	//FUNTUNA&APPS
 
 	scr_printf("\t\tYoshiBoot Fortuna\n");
-		retorno = write_embed(&YOSHBOOT_ELF, size_YOSHBOOT_ELF, "BOOT", "BOOT.ELF",mcport);
+		retorno = write_embed_replace(&YOSHBOOT_ELF, size_YOSHBOOT_ELF, "BOOT", "BOOT.ELF",mcport);
 		if (retorno < 0) {return 6;}
-	    retorno = write_embed(&yoshboot_icn, size_yoshboot_icn, "BOOT", "yoshboot.icn",mcport);
+	    retorno = write_embed_replace(&yoshboot_icn, size_yoshboot_icn, "BOOT", "yoshboot.icn",mcport);
 		if (retorno < 0) {return 6;}
-		retorno = write_embed(&yoshboot_sys, size_yoshboot_sys, "BOOT", "icon.sys",mcport);
+		retorno = write_embed_replace(&yoshboot_sys, size_yoshboot_sys, "BOOT", "icon.sys",mcport);
 		if (retorno < 0) {return 6;}
 	scr_printf("\t\tYoshiBoot Configuration\n");
-		retorno = write_embed(&YOSHCONF_CNF, size_YOSHCONF_CNF, "SYS-CONF", "OSDMENU.CNF",mcport);
+		retorno = write_embed_replace(&YOSHCONF_CNF, size_YOSHCONF_CNF, "SYS-CONF", "OSDMENU.CNF",mcport);
 		if (retorno < 0) {return 6;}
-	    retorno = write_embed(&yoshconf_icn, size_yoshconf_icn, "SYS-CONF", "yoshconf.icn",mcport);
+	    retorno = write_embed_replace(&yoshconf_icn, size_yoshconf_icn, "SYS-CONF", "yoshconf.icn",mcport);
 		if (retorno < 0) {return 6;}
-		retorno = write_embed(&yoshconf_sys, size_yoshconf_sys, "SYS-CONF", "icon.sys",mcport);
+		retorno = write_embed_replace(&yoshconf_sys, size_yoshconf_sys, "SYS-CONF", "icon.sys",mcport);
 		if (retorno < 0) {return 6;}
-	    retorno = write_embed(&ule_elf, size_ule_elf, "SYS-CONF", "ULE.ELF",mcport);
+	    retorno = write_embed_replace(&ule_elf, size_ule_elf, "SYS-CONF", "ULE.ELF",mcport);
 		if (retorno < 0) {return 6;}
 	///FUNTUNA&APPS
 	scr_printf("\t\tOPL\n");
-		retorno = write_embed(&opl_elf, size_opl_elf, "OPL","OPNPS2LD.ELF",mcport);
+		retorno = write_embed_replace(&opl_elf, size_opl_elf, "OPL","OPNPS2LD.ELF",mcport);
 		if (retorno < 0) {return 6;}
-		retorno = write_embed(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
+		retorno = write_embed_replace(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
 		if (retorno < 0) {return 6;}
-	    retorno = write_embed(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
+	    retorno = write_embed_replace(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
+	    if (retorno < 0) {return 6;}
+	scr_printf("\t\tPOPStarter exFAT\n");
+		retorno = write_embed_replace(&pops_usbd, size_pops_usbd, "POPSTARTER","usbd.irx",mcport);
+		if (retorno < 0) {return 6;}
+		retorno = write_embed_replace(&pops_usbhdfsd, size_pops_usbhdfsd, "POPSTARTER","usbhdfsd.irx",mcport);
+		if (retorno < 0) {return 6;}
+		retorno = write_embed_replace(&pops_icn, size_pops_icn, "POPSTARTER", "pops.icn", mcport);
+		if (retorno < 0) {return 6;}
+	    retorno = write_embed_replace(&pops_sys, size_pops_sys, "POPSTARTER", "icon.sys", mcport);
 	    if (retorno < 0) {return 6;}
 	scr_printf("Installation Finished\n");
 	return 0;
