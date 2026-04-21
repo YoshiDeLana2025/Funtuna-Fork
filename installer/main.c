@@ -15,16 +15,6 @@ extern int size_opl_icn;
 extern u8 opl_sys[];
 extern int size_opl_sys;
 //----------------------------------------//
-extern u8 opl_cfg[];
-extern int size_opl_cfg;
-//----------------------------------------//
-extern u8 opl_cfg1[];
-extern int size_opl_cfg1;
-//----------------------------------------//
-extern u8 opl_dualshock[];
-extern int size_opl_dualshock;
-//
-//----------------------------------------//
 extern u8  opentuna_slims[];
 extern int size_opentuna_slims;
 //----------------------------------------//
@@ -37,32 +27,23 @@ extern int size_opentuna_fat170;
 extern u8 exploit_sys[];
 extern int size_exploit_sys;
 //----------------------------------------//
-extern u8 FMCB_ELF[];
-extern int size_FMCB_ELF;
+extern u8 YOSHBOOT_ELF[];
+extern int size_YOSHBOOT_ELF;
 //----------------------------------------//
-extern u8 FMCB_CNF[];
-extern int size_FMCB_CNF;
+extern u8 YOSHCONF_CNF[];
+extern int size_YOSHCONF_CNF;
 //----------------------------------------//
-extern u8 CFG_ELF[];
-extern int size_CFG_ELF;
+extern u8 yoshconf_icn[];
+extern int size_yoshconf_icn;
 //----------------------------------------//
-extern u8 boot_icn[];
-extern int size_boot_icn;
+extern u8 yoshconf_sys[];
+extern int size_yoshconf_sys;
 //----------------------------------------//
-extern u8 boot_sys[];
-extern int size_boot_sys;
+extern u8 yoshboot_icn[];
+extern int size_yoshboot_icn;
 //----------------------------------------//
-extern u8 ule_cnf[];
-extern int size_ule_cnf;
-//----------------------------------------//
-extern u8 FUNTUNA_USBD[];
-extern int size_FUNTUNA_USBD;
-//----------------------------------------//
-extern u8 FUNTUNA_USBHDFSD[];
-extern int size_FUNTUNA_USBHDFSD;
-//----------------------------------------//
-extern u8 poweroff_elf[];
-extern int size_poweroff_elf;
+extern u8 yoshboot_sys[];
+extern int size_yoshboot_sys;
 //----------------------------------------//
 extern u8 opl_elf[];
 extern int size_opl_elf;
@@ -70,11 +51,6 @@ extern int size_opl_elf;
 extern u8 ule_elf[];
 extern int size_ule_elf;
 //----------------------------------------//
-extern u8 apps_icn[];
-extern int size_apps_icn;
-//----------------------------------------//
-extern u8 apps_sys[];
-extern int size_apps_sys;
 
 static int pad_inited = 0;
 #include "FUNTUNA_FORK_INSTALLER_BG.h"
@@ -398,8 +374,8 @@ static int install(int mcport, int icon_variant)
 	scr_printf("\t\tBOOT\n");
 		ret = mcMkDir(mcport, 0, "BOOT");
 		mcSync(0, NULL, &ret);
-	scr_printf("\t\tAPPS\n");
-		ret = mcMkDir(mcport, 0, "APPS");
+	scr_printf("\t\tSYS-CONF\n");
+		ret = mcMkDir(mcport, 0, "SYS-CONF");
 		mcSync(0, NULL, &ret);
 	scr_printf("\t\tOPL\n");
 		ret = mcMkDir(mcport, 0, "OPL");
@@ -461,55 +437,31 @@ static int install(int mcport, int icon_variant)
 	///OPENTUNA
 	
 	//FUNTUNA&APPS
-	scr_printf("\t\tuLaunchELF\n");
-		retorno = write_embed(&ule_elf, size_ule_elf, "BOOT", "ULE.ELF",mcport);
-		if (retorno < 0) {return 6;}
-		retorno = write_embed(&ule_cnf, size_ule_cnf, "BOOT", "LAUNCHELF.CNF",mcport);
-		if (retorno < 0) {return 6;}
 
-	scr_printf("\t\tFreeMcBoot\n");
-		retorno = write_embed(&FMCB_ELF, size_FMCB_ELF, "BOOT", "BOOT.ELF",mcport);
+	scr_printf("\t\tYoshiBoot Fortuna\n");
+		retorno = write_embed(&YOSHBOOT_ELF, size_YOSHBOOT_ELF, "BOOT", "BOOT.ELF",mcport);
 		if (retorno < 0) {return 6;}
-		retorno = write_embed(&FMCB_CNF, size_FMCB_CNF, "BOOT", "FUNTUNA.CNF",mcport);
+	    retorno = write_embed(&yoshboot_icn, size_yoshboot_icn, "BOOT", "yoshboot.icn",mcport);
 		if (retorno < 0) {return 6;}
-	scr_printf("\t\tFreeMcBoot Configurator\n");
-		retorno = write_embed(&CFG_ELF, size_CFG_ELF, "BOOT", "CFG.ELF",mcport);
+		retorno = write_embed(&yoshboot_sys, size_yoshboot_sys, "BOOT", "icon.sys",mcport);
 		if (retorno < 0) {return 6;}
-        
-    scr_printf("\t\tFreeMcBoot USB drivers\n");
-		retorno = write_embed(&FUNTUNA_USBD, size_FUNTUNA_USBD, "BOOT", "USBD.IRX",mcport);
+	scr_printf("\t\tYoshiBoot Configuration\n");
+		retorno = write_embed(&YOSHCONF_CNF, size_YOSHCONF_CNF, "SYS-CONF", "OSDMENU.CNF",mcport);
 		if (retorno < 0) {return 6;}
-                retorno = write_embed(&FUNTUNA_USBHDFSD, size_FUNTUNA_USBHDFSD, "BOOT", "USBHDFSD.IRX",mcport);
+	    retorno = write_embed(&yoshconf_icn, size_yoshconf_icn, "SYS-CONF", "yoshconf.icn",mcport);
 		if (retorno < 0) {return 6;}
-
-	scr_printf("\t\tBOOT icons\n");
-		retorno = write_embed(&boot_icn, size_boot_icn, "BOOT", "SYSTEM.icn",mcport);
+		retorno = write_embed(&yoshconf_sys, size_yoshconf_sys, "SYS-CONF", "icon.sys",mcport);
 		if (retorno < 0) {return 6;}
-		retorno = write_embed(&boot_sys, size_boot_sys, "BOOT", "icon.sys",mcport);
-		if (retorno < 0) {return 6;}
-	scr_printf("\t\tPoweroff utility\n");
-		retorno = write_embed(&poweroff_elf, size_poweroff_elf, "BOOT", "POWEROFF.ELF",mcport);
+	    retorno = write_embed(&ule_elf, size_ule_elf, "SYS-CONF", "ULE.ELF",mcport);
 		if (retorno < 0) {return 6;}
 	///FUNTUNA&APPS
-	scr_printf("\t\tAPPS folder icons\n");
-		retorno = write_embed(&apps_sys, size_apps_sys, "APPS","icon.sys",mcport);
-		if (retorno < 0) {return 6;}
-		retorno = write_embed(&apps_icn, size_apps_icn, "APPS","funtuna_apps.icn",mcport);
-		if (retorno < 0) {return 6;}
 	scr_printf("\t\tOPL\n");
-		retorno = write_embed(&opl_elf, size_opl_elf, "APPS","OPNPS2LD.ELF",mcport);
+		retorno = write_embed(&opl_elf, size_opl_elf, "OPL","OPNPS2LD.ELF",mcport);
 		if (retorno < 0) {return 6;}
-	if (!file_exists(opl_settings_location))//If no OPL config file...
-	{
-		scr_printf("\t\tNo OPL settings found!\n\t\t Loading Preconfigured OPL Folder...\n");
-		if (mcport==0)
-			write_embed_replace(&opl_cfg, size_opl_cfg, "OPL", "conf_opl.cfg", mcport);//main config file has two variants, each of them has IGR Path assigned according to mcport value
-		else write_embed_replace(&opl_cfg1, size_opl_cfg1, "OPL", "conf_opl.cfg", mcport);//
-		
-		write_embed_replace(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
-		write_embed_replace(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
-		write_embed_replace(&opl_dualshock, size_opl_dualshock, "OPL", "conf_game.cfg", mcport);
-	}
+		retorno = write_embed(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
+		if (retorno < 0) {return 6;}
+	    retorno = write_embed(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
+	    if (retorno < 0) {return 6;}
 	scr_printf("Installation Finished\n");
 	return 0;
 }
