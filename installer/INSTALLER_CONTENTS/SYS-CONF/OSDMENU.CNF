@@ -1,0 +1,41 @@
+OSDSYS_video_mode = AUTO
+OSDSYS_region = AUTO
+OSDSYS_Skip_Disc = 0
+OSDSYS_Skip_Logo = 0
+OSDSYS_Inner_Browser = 0
+#----------------------------------
+OSDSYS_custom_menu = 1
+OSDSYS_scroll_menu = 1
+OSDSYS_menu_x = 430
+OSDSYS_menu_y = 110
+OSDSYS_enter_x = -1
+OSDSYS_enter_y = -1
+OSDSYS_version_x = -1
+OSDSYS_version_y = -1
+OSDSYS_cursor_max_velocity = 1500
+OSDSYS_cursor_acceleration = 150
+OSDSYS_left_cursor = 
+OSDSYS_right_cursor = 
+OSDSYS_menu_top_delimiter = r0.00cYc1oc6sc9hcic3Bootr0.00
+OSDSYS_menu_bottom_delimiter = c0r0.60version 1.1.0 (Fortuna)r0.00
+OSDSYS_num_displayed_items = 5
+OSDSYS_selected_color = 0x10,0x80,0xE0,0x80
+OSDSYS_unselected_color = 0x33,0x33,0x33,0x80
+#----------------------------------
+cdrom_skip_ps2logo = 0
+cdrom_disable_gameid = 0
+cdrom_use_dkwdrv = 0
+ps1drv_enable_fast = 0
+ps1drv_enable_smooth = 0
+ps1drv_use_ps1vn = 0
+app_gameid = 0
+#----------------------------------
+name_OSDSYS_ITEM_1 = OPL
+path1_OSDSYS_ITEM_1 = mass:/APPS/OPNPS2LD.ELF
+path2_OSDSYS_ITEM_1 = mc?:/APPS/OPNPS2LD.ELF
+path3_OSDSYS_ITEM_1 = mc?:/OPL/OPNPS2LD.ELF
+#----------------------------------
+name_OSDSYS_ITEM_2 = wLaunchELF
+path1_OSDSYS_ITEM_2 = mass:/ULE.ELF
+path2_OSDSYS_ITEM_2 = mc?:/BOOT/ULE.ELF
+path3_OSDSYS_ITEM_2 = mc?:/SYS-CONF/ULE.ELF
