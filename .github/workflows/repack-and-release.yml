@@ -1,17 +1,7 @@
 name: Release Funtuna
 on:
   workflow_dispatch:
-  pull_request:
-  repository_dispatch:
-    types: [Component_update]
-  push:
-    paths:
-      - '__Release/**'
-      - 'installer/**'
-      - '.github/workflows/repack-and-release.yml'
 
-#  schedule:
-#   - cron: "0 15 * * 2,5"
 jobs:
   Repack_and_Release:
     runs-on: ubuntu-latest
@@ -24,11 +14,6 @@ jobs:
 
     - name: checkout code for release
       uses: actions/checkout@v1
-      
-    - name: Update wLaunchELF_ISR
-      run: |
-         wget https://github.com/israpps/wLaunchELF_ISR/releases/download/latest/BOOT-DS34.ELF -O installer/INSTALLER_CONTENTS/BOOT/ULE.ELF
-         wget https://github.com/israpps/wLaunchELF_ISR/releases/download/latest/BOOT-DS34.ELF -O __Release/ULE_psu.ELF
     
     - name: build installer
       run: |
@@ -39,7 +24,7 @@ jobs:
     - name: prepare Release package
       run: |
         SCH=${GITHUB_SHA::7}
-        cp installer/Installer.elf __Release/FunTuna-Fork_installer-$SCH.ELF
+        cp installer/Installer.elf __Release/YoshiBoot_Fortuna_Installer.ELF
         cp -r installer/INSTALLER_CONTENTS/BOOT/ __Release/MANUAL_INSTALL/BOOT/
         cp -r installer/INSTALLER_CONTENTS/APPS/ __Release/MANUAL_INSTALL/APPS/
         cp -r installer/INSTALLER_CONTENTS/OPL/ __Release/MANUAL_INSTALL/OPL/
@@ -49,7 +34,7 @@ jobs:
         SCH=${GITHUB_SHA::7}
         cd __Release
         echo commit $SCH >>commit.txt
-        TARGET=FunTuna\[$SCH\].7z
+        TARGET=YoshiBoot_Fortuna_Installer.7z
         echo TARGET is $TARGET
         7z a -t7z -r $TARGET *
         ls -R 
@@ -61,16 +46,4 @@ jobs:
         name: FunTuna
         path: |
              __Release/*.7z
-             installer/FunTuna-Fork_Installer.ELF
- 
-    - name: Create release
-      if: github.ref == 'refs/heads/main'
-      uses: marvinpinto/action-automatic-releases@latest
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
-        automatic_release_tag: "latest"
-        title: "Latest automated Repack"
-        files: |
-                __Release/*.7z
-                installer/FunTuna-Fork_Installer.ELF
+             installer/YoshiBoot_Fortuna_Installer.ELF
