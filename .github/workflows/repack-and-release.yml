@@ -25,9 +25,6 @@ jobs:
       run: |
         SCH=${GITHUB_SHA::7}
         cp installer/Installer.elf __Release/YoshiBoot_Fortuna_Installer.ELF
-        cp -r installer/INSTALLER_CONTENTS/BOOT/ __Release/MANUAL_INSTALL/BOOT/
-        cp -r installer/INSTALLER_CONTENTS/APPS/ __Release/MANUAL_INSTALL/APPS/
-        cp -r installer/INSTALLER_CONTENTS/OPL/ __Release/MANUAL_INSTALL/OPL/
 
     - name: Zip Folder
       run: |
