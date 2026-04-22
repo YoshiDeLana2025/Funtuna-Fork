@@ -364,7 +364,22 @@ static int install(int mcport, int icon_variant)
 	// /CLEANUP
 	//If there's no free space, we have an error:
 	if (mc_Free < 2000){return NOT_ENOUGH_SPACE;}//Installation actually requires less than this (something like 1.6MB), but i left a larger size for space check since OPL will create settings and icon files on first launch... (and users will innevitally load more files)
-
+//If the files exists, we have an error:
+	if (mcport == 0) {
+	if (file_exists("mc0:/BXEXEC-OPENTUNA/icon.icn")) {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc0:/BXEXEC-OPENTUNA/icon.sys")) {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc0:/BXEXEC-FUNTUNA/icon.icn"))  {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc0:/BXEXEC-FUNTUNA/icon.sys"))  {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc0:/OPENTUNA/icon.sys"))        {return OPENTUNA_FOUND;}
+	if (file_exists("mc0:/FORTUNA/icon.sys"))         {return FORTUNA_FOUND;}
+	} else {
+	if (file_exists("mc1:/BXEXEC-OPENTUNA/icon.icn")) {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc1:/BXEXEC-OPENTUNA/icon.sys")) {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc1:/BXEXEC-FUNTUNA/icon.icn"))  {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc1:/BXEXEC-FUNTUNA/icon.sys"))  {return FUNTUNA_FORK_FOUND;}
+	if (file_exists("mc1:/OPENTUNA/icon.sys"))        {return OPENTUNA_FOUND;}
+	if (file_exists("mc1:/FORTUNA/icon.sys"))         {return FORTUNA_FOUND;}
+	}
 	
 	//FOLDERS
 	scr_printf("\tCreating Folders...\n");
