@@ -392,6 +392,9 @@ static int install(int mcport, int icon_variant)
 	scr_printf("\t\tOPL\n");
 		ret = mcMkDir(mcport, 0, "OPL");
 		mcSync(0, NULL, &ret);
+	scr_printf("\t\tPOPSTARTER\n");
+		ret = mcMkDir(mcport, 0, "POPSTARTER");
+		mcSync(0, NULL, &ret);
 	if (icon_variant != UNSUPPORTED){
 	scr_printf("\t\tBXEXEC-OPENTUNA\n");
 		ret = mcMkDir(mcport, 0, "BXEXEC-OPENTUNA");
