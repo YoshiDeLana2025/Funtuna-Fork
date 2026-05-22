@@ -9,11 +9,7 @@
 #define DEBUG_PRINTF(arg...)	
 #endif
 
-extern u8 opl_icn[];
-extern int size_opl_icn;
-//----------------------------------------//
-extern u8 opl_sys[];
-extern int size_opl_sys;
+
 //----------------------------------------//
 extern u8  opentuna_slims[];
 extern int size_opentuna_slims;
@@ -30,6 +26,12 @@ extern int size_exploit_sys;
 extern u8 YOSHBOOT_ELF[];
 extern int size_YOSHBOOT_ELF;
 //----------------------------------------//
+extern u8 yoshboot_icn[];
+extern int size_yoshboot_icn;
+//----------------------------------------//
+extern u8 yoshboot_sys[];
+extern int size_yoshboot_sys;
+//----------------------------------------//
 extern u8 YOSHCONF_CNF[];
 extern int size_YOSHCONF_CNF;
 //----------------------------------------//
@@ -39,17 +41,26 @@ extern int size_yoshconf_icn;
 extern u8 yoshconf_sys[];
 extern int size_yoshconf_sys;
 //----------------------------------------//
-extern u8 yoshboot_icn[];
-extern int size_yoshboot_icn;
+extern u8 ule_elf[];
+extern int size_ule_elf;
 //----------------------------------------//
-extern u8 yoshboot_sys[];
-extern int size_yoshboot_sys;
+extern u8 opl_icn[];
+extern int size_opl_icn;
+//----------------------------------------//
+extern u8 opl_sys[];
+extern int size_opl_sys;
 //----------------------------------------//
 extern u8 opl_elf[];
 extern int size_opl_elf;
 //----------------------------------------//
-extern u8 ule_elf[];
-extern int size_ule_elf;
+extern u8 opl_cfg[];
+extern int size_opl_cfg;
+//----------------------------------------//
+extern u8 opl_cfg1[];
+extern int size_opl_cfg1;
+//----------------------------------------//
+extern u8 opl_dualshock[];
+extern int size_opl_dualshock;
 //----------------------------------------//
 extern u8 pops_icn[];
 extern int size_pops_icn;
@@ -477,6 +488,16 @@ static int install(int mcport, int icon_variant)
 		if (retorno < 0) {return 6;}
 	    retorno = write_embed_replace(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
 	    if (retorno < 0) {return 6;}
+		if (mcport==0) {
+			retorno = write_embed_replace(&opl_cfg, size_opl_cfg, "OPL", "conf_opl.cfg", mcport);//main config file has two variants, each of them has IGR Path assigned according to mcport value
+			if (retorno < 0) {return 6;}
+		} else {
+			retorno = write_embed_replace(&opl_cfg1, size_opl_cfg1, "OPL", "conf_opl.cfg", mcport);//
+			if (retorno < 0) {return 6;}
+		}
+		retorno = write_embed_replace(&opl_dualshock, size_opl_dualshock, "OPL", "conf_game.cfg", mcport);
+		if (retorno < 0) {return 6;}
+
 	scr_printf("\t\tPOPStarter exFAT\n");
 		retorno = write_embed_replace(&pops_usbd, size_pops_usbd, "POPSTARTER","usbd.irx",mcport);
 		if (retorno < 0) {return 6;}
