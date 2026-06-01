@@ -1,4 +1,3 @@
-
 #include "defines.h"
 uint32 BG_w = 640;
 uint32 BG_h = 448;
