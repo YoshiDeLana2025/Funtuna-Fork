@@ -46,7 +46,7 @@ ule_elf.s:
 ule_bg.s:
 	@bin2s INSTALLER_CONTENTS/SYS-CONF/ULEBG.JPG ule_bg.s ule_bg
 	
-ule_elf.s:
+ule_cnf.s:
 	@bin2s INSTALLER_CONTENTS/SYS-CONF/LAUNCHELF.CNF ule_cnf.s ule_cnf
 
 # /SYS-CONF
