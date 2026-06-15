@@ -46,6 +46,12 @@ extern int size_yoshconf_sys;
 extern u8 ule_elf[];
 extern int size_ule_elf;
 //----------------------------------------//
+extern u8 ule_cnf[];
+extern int size_ule_cnf;
+//----------------------------------------//
+extern u8 ule_bg[];
+extern int size_ule_bg;
+//----------------------------------------//
 extern u8 opl_icn[];
 extern int size_opl_icn;
 //----------------------------------------//
@@ -57,9 +63,6 @@ extern int size_opl_elf;
 //----------------------------------------//
 extern u8 opl_cfg[];
 extern int size_opl_cfg;
-//----------------------------------------//
-extern u8 opl_cfg1[];
-extern int size_opl_cfg1;
 //----------------------------------------//
 extern u8 opl_dualshock[];
 extern int size_opl_dualshock;
@@ -83,13 +86,11 @@ static int pad_inited = 0;
 #include "FUNTUNA_FORK_INSTALLER_SUCESS.h"
 #include "FUNTUNA_FORK_INSTALLER_WELCOME.h"
 
-
 #include "ERROR_MESSAGES/ICONQUERY.h"
 #include "ERROR_MESSAGES/ICONQUERY_FAT170.h"
 #include "ERROR_MESSAGES/ICONQUERY_FATS.h"
 #include "ERROR_MESSAGES/ICONQUERY_SLIMS.h"
 #include "ERROR_MESSAGES/INSTALL_QUERY.h"
-
 
 #include "ERROR_MESSAGES/FOUND_APPS.h"
 #include "ERROR_MESSAGES/FOUND_BOOT.h"
@@ -536,6 +537,16 @@ static int install(int mcport, int icon_variant) {
   if (retorno < 0) {
     return 6;
   }
+  retorno = write_embed_replace(&ule_bg, size_ule_bg, "SYS-CONF", "ULEBG.JPG",
+                                mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&ule_cnf, size_ule_cnf, "SYS-CONF",
+                                "LAUNCHELF.CNF", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
   /// FUNTUNA&APPS
   scr_printf("\t\tOPL\n");
   retorno = write_embed_replace(&opl_elf, size_opl_elf, "OPL", "OPNPS2LD.ELF",
@@ -553,20 +564,10 @@ static int install(int mcport, int icon_variant) {
   if (retorno < 0) {
     return 6;
   }
-  if (mcport == 0) {
-    retorno = write_embed_replace(
-        &opl_cfg, size_opl_cfg, "OPL", "conf_opl.cfg",
-        mcport); // main config file has two variants, each of them has IGR Path
-                 // assigned according to mcport value
-    if (retorno < 0) {
-      return 6;
-    }
-  } else {
-    retorno = write_embed_replace(&opl_cfg1, size_opl_cfg1, "OPL",
-                                  "conf_opl.cfg", mcport); //
-    if (retorno < 0) {
-      return 6;
-    }
+  retorno = write_embed_replace(&opl_cfg, size_opl_cfg, "OPL", "conf_opl.cfg",
+                                mcport);
+  if (retorno < 0) {
+    return 6;
   }
   retorno = write_embed_replace(&opl_dualshock, size_opl_dualshock, "OPL",
                                 "conf_game.cfg", mcport);

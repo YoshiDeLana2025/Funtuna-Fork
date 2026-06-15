@@ -2,8 +2,8 @@ EE_BIN = Installer.elf
 EE_BIN_PACKED = YoshiBoot_Fortuna_Installer.ELF
 EE_BIN_STRIPPED = stripped.elf
 EE_OBJS = main.o gs.o pad.o  gs_asm.o ps2_asm.o dma_asm.o
-EE_OBJS += YOSHBOOT_ELF.o YOSHCONF_ELF.o opl_elf.o ule_elf.o yoshconf_icn.o yoshconf_sys.o yoshboot_sys.o yoshboot_icn.o exploit_sys.o exploit_bin.o YOSHCONF_CNF.o OpenTuna_SLIMS.o OpenTuna_FAT-170.o OpenTuna_FAT-110-120-150-160.o opl_icn.o opl_sys.o opl_cfg.o opl_cfg1.o opl_dualshock.o pops_usbd.o pops_usbhdfsd.o pops_icn.o pops_sys.o
-EE_SRC =   YOSHBOOT_ELF.s YOSHCONF_ELF.s opl_elf.s ule_elf.s yoshconf_icn.s yoshconf_sys.s yoshboot_sys.s yoshboot_icn.s exploit_sys.s exploit_bin.s YOSHCONF_CNF.s OpenTuna_SLIMS.s OpenTuna_FAT-170.s OpenTuna_FAT-110-120-150-160.s opl_icn.s opl_sys.s opl_cfg.s opl_cfg1.s opl_dualshock.s pops_usbd.s pops_usbhdfsd.s pops_icn.s pops_sys.s
+EE_OBJS += YOSHBOOT_ELF.o YOSHCONF_ELF.o opl_elf.o ule_elf.o yoshconf_icn.o yoshconf_sys.o yoshboot_sys.o yoshboot_icn.o exploit_sys.o exploit_bin.o YOSHCONF_CNF.o OpenTuna_SLIMS.o OpenTuna_FAT-170.o OpenTuna_FAT-110-120-150-160.o opl_icn.o opl_sys.o opl_cfg.o ule_cnf.o ule_bg.o opl_dualshock.o pops_usbd.o pops_usbhdfsd.o pops_icn.o pops_sys.o
+EE_SRC =   YOSHBOOT_ELF.s YOSHCONF_ELF.s opl_elf.s ule_elf.s yoshconf_icn.s yoshconf_sys.s yoshboot_sys.s yoshboot_icn.s exploit_sys.s exploit_bin.s YOSHCONF_CNF.s OpenTuna_SLIMS.s OpenTuna_FAT-170.s OpenTuna_FAT-110-120-150-160.s opl_icn.s opl_sys.s opl_cfg.s ule_cnf.s ule_bg.s opl_dualshock.s pops_usbd.s pops_usbhdfsd.s pops_icn.s pops_sys.s
 EE_LIBS = -ldebug -lcdvd -lpatches -lpad -lmc
 
 ifeq ($(BOOT_FUNTUNA_ON_SUCCESS),1)
@@ -43,6 +43,12 @@ yoshconf_sys.s:
 ule_elf.s:
 	@bin2s INSTALLER_CONTENTS/SYS-CONF/ULE.ELF ule_elf.s ule_elf
 
+ule_bg.s:
+	@bin2s INSTALLER_CONTENTS/SYS-CONF/ULEBG.JPG ule_bg.s ule_bg
+	
+ule_elf.s:
+	@bin2s INSTALLER_CONTENTS/SYS-CONF/LAUNCHELF.CNF ule_cnf.s ule_cnf
+
 # /SYS-CONF
 
 # OPL
@@ -57,9 +63,6 @@ opl_sys.s:
 
 opl_cfg.s:
 	@bin2s INSTALLER_CONTENTS/OPL/conf_opl.cfg opl_cfg.s opl_cfg
-	
-opl_cfg1.s:
-	@bin2s INSTALLER_CONTENTS/OPL/conf_opl1.cfg opl_cfg1.s opl_cfg1
 	
 opl_dualshock.s:
 	@bin2s INSTALLER_CONTENTS/OPL/conf_game.cfg opl_dualshock.s opl_dualshock
