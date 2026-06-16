@@ -21,16 +21,8 @@ jobs:
         make clean
         make
 
-    - name: prepare Release package
-      run: |
-        SCH=${GITHUB_SHA::7}
-        cp installer/Installer.elf __Release/YoshiBoot_Fortuna_Installer.ELF
-
     - name: Zip Folder
       run: |
-        SCH=${GITHUB_SHA::7}
-        cd __Release
-        echo commit $SCH >>commit.txt
         TARGET=YoshiBoot_Fortuna_Installer.7z
         echo TARGET is $TARGET
         7z a -t7z -r $TARGET *
@@ -42,5 +34,4 @@ jobs:
       with:
         name: FunTuna
         path: |
-             __Release/*.7z
              installer/YoshiBoot_Fortuna_Installer.ELF
