@@ -11,7 +11,7 @@ jobs:
     - name: Install dependencies
       run: |
         apk add build-base git zip p7zip
-        apk add --no-cache gcompat
+        apk add --upgrade musl libc-dev
 
     - name: checkout code for release
       uses: actions/checkout@v1
@@ -31,7 +31,7 @@ jobs:
 
     - name: Upload artifacts
       if: ${{ success() }}
-      uses: actions/upload-artifact@v3.2.2
+      uses: actions/upload-artifact@v7
       with:
         name: FunTuna
         path: |
