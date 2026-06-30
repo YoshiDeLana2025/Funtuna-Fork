@@ -8,13 +8,6 @@ jobs:
     container: ps2dev/ps2dev:v2.0.0
     steps:
     
-    - name: Install bin2s
-      run: |
-        cd deps
-        chmod +x bin2s
-        cp bin2s /usr/local/ps2dev/ps2sdk/bin/bin2s
-        chmod +x /usr/local/ps2dev/ps2sdk/bin/bin2s
-        cd ..
     
     - name: Install dependencies
       run: |
@@ -29,6 +22,11 @@ jobs:
     
     - name: build installer
       run: |
+        cd deps
+        chmod +x bin2s
+        cp bin2s /usr/local/ps2dev/ps2sdk/bin/bin2s
+        chmod +x /usr/local/ps2dev/ps2sdk/bin/bin2s
+        cd ..
         cd installer
         make clean
         make
