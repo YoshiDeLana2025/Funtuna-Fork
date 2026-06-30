@@ -1,3 +1,12 @@
+define bin2s_modern
+	echo ".global $(3)" > $(2)
+	echo ".type $(3), @object" >> $(2)
+	echo "$(3):" >> $(2)
+	echo ".incbin \"$(1)\"" >> $(2)
+	echo "$(3)_end:" >> $(2)
+	echo ".global $(3)_end" >> $(2)
+endef
+
 EE_BIN = Installer.elf
 EE_BIN_PACKED = YoshiBoot_Fortuna_Installer.ELF
 EE_BIN_STRIPPED = stripped.elf
@@ -17,91 +26,84 @@ all:
 
 # BOOT
 YOSHBOOT_ELF.s:
-	@bin2s INSTALLER_CONTENTS/BOOT/BOOT.ELF YOSHBOOT_ELF.s YOSHBOOT_ELF
+	@$(call bin2s_modern,INSTALLER_CONTENTS/BOOT/BOOT.ELF,YOSHBOOT_ELF.s,YOSHBOOT_ELF)
 
 yoshboot_icn.s:
-	@bin2s INSTALLER_CONTENTS/BOOT/yoshboot.icn yoshboot_icn.s yoshboot_icn
+	@$(call bin2s_modern,INSTALLER_CONTENTS/BOOT/yoshboot.icn,yoshboot_icn.s,yoshboot_icn)
 
 yoshboot_sys.s:
-	@bin2s INSTALLER_CONTENTS/BOOT/icon.sys yoshboot_sys.s yoshboot_sys	
+	@$(call bin2s_modern,INSTALLER_CONTENTS/BOOT/icon.sys,yoshboot_sys.s,yoshboot_sys)
 # /BOOT
 
 # SYS-CONF
-
 YOSHCONF_CNF.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/OSDMENU.CNF YOSHCONF_CNF.s YOSHCONF_CNF
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/OSDMENU.CNF,YOSHCONF_CNF.s,YOSHCONF_CNF)
 
 YOSHCONF_ELF.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/YOSHCONF.ELF YOSHCONF_ELF.s YOSHCONF_ELF
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/YOSHCONF.ELF,YOSHCONF_ELF.s,YOSHCONF_ELF)
 
 yoshconf_icn.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/yoshconf.icn yoshconf_icn.s yoshconf_icn
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/yoshconf.icn,yoshconf_icn.s,yoshconf_icn)
 
 yoshconf_sys.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/icon.sys yoshconf_sys.s yoshconf_sys
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/icon.sys,yoshconf_sys.s,yoshconf_sys)
 
 ule_elf.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/ULE.ELF ule_elf.s ule_elf
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/ULE.ELF,ule_elf.s,ule_elf)
 
 ule_bg.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/ULEBG.JPG ule_bg.s ule_bg
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/ULEBG.JPG,ule_bg.s,ule_bg)
 	
 ule_cnf.s:
-	@bin2s INSTALLER_CONTENTS/SYS-CONF/LAUNCHELF.CNF ule_cnf.s ule_cnf
-
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/LAUNCHELF.CNF,ule_cnf.s,ule_cnf)
 # /SYS-CONF
 
 # OPL
 opl_elf.s:
-	@bin2s INSTALLER_CONTENTS/OPL/OPNPS2LD.ELF opl_elf.s opl_elf
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/OPNPS2LD.ELF,opl_elf.s,opl_elf)
 
 opl_icn.s:
-	@bin2s INSTALLER_CONTENTS/OPL/opl.icn opl_icn.s opl_icn
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/opl.icn,opl_icn.s,opl_icn)
 	
 opl_sys.s:
-	@bin2s INSTALLER_CONTENTS/OPL/icon.sys opl_sys.s opl_sys
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/icon.sys,opl_sys.s,opl_sys)
 
 opl_cfg.s:
-	@bin2s INSTALLER_CONTENTS/OPL/conf_opl.cfg opl_cfg.s opl_cfg
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_opl.cfg,opl_cfg.s,opl_cfg)
 	
 opl_dualshock.s:
-	@bin2s INSTALLER_CONTENTS/OPL/conf_game.cfg opl_dualshock.s opl_dualshock
-		
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_game.cfg,opl_dualshock.s,opl_dualshock)
 # /OPL
 
 # POPSTARTER
-
 pops_icn.s:
-	@bin2s INSTALLER_CONTENTS/POPSTARTER/pops.icn pops_icn.s pops_icn
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/pops.icn,pops_icn.s,pops_icn)
 
 pops_sys.s:
-	@bin2s INSTALLER_CONTENTS/POPSTARTER/icon.sys pops_sys.s pops_sys
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/icon.sys,pops_sys.s,pops_sys)
 
 pops_usbd.s:
-	@bin2s INSTALLER_CONTENTS/POPSTARTER/usbd.irx pops_usbd.s pops_usbd
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/usbd.irx,pops_usbd.s,pops_usbd)
 
 pops_usbhdfsd.s:
-	@bin2s INSTALLER_CONTENTS/POPSTARTER/usbhdfsd.irx pops_usbhdfsd.s pops_usbhdfsd
-
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/usbhdfsd.irx,pops_usbhdfsd.s,pops_usbhdfsd)
 # /POPSTARTER
-
 
 # EXPLOIT
 exploit_bin.s:
-	@bin2s INSTALLER_CONTENTS/ENTRYPOINT/exploit.bin exploit_bin.s exploit_bin
+	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/exploit.bin,exploit_bin.s,exploit_bin)
 	
 OpenTuna_SLIMS.s:
-	@bin2s INSTALLER_CONTENTS/ENTRYPOINT/slims.bin OpenTuna_SLIMS.s opentuna_slims
+	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/slims.bin,OpenTuna_SLIMS.s,opentuna_slims)
 	
 OpenTuna_FAT-110-120-150-160.s:
-	@bin2s INSTALLER_CONTENTS/ENTRYPOINT/fats.bin OpenTuna_FAT-110-120-150-160.s opentuna_fats
+	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/fats.bin,OpenTuna_FAT-110-120-150-160.s,opentuna_fats)
 	
 OpenTuna_FAT-170.s:
-	@bin2s INSTALLER_CONTENTS/ENTRYPOINT/170.bin OpenTuna_FAT-170.s opentuna_fat170
-
+	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/170.bin,OpenTuna_FAT-170.s,opentuna_fat170)
 
 exploit_sys.s:
-	@bin2s INSTALLER_CONTENTS/ENTRYPOINT/exploit.sys exploit_sys.s exploit_sys
+	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/exploit.sys,exploit_sys.s,exploit_sys)
 # /EXPLOIT
 clean:
 	@echo cleaning...
