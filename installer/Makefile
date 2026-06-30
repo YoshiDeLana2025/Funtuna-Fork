@@ -1,5 +1,8 @@
 define bin2s_modern
-	echo ".gnu_attribute 4, 1" > $(2)
+	echo ".set noat" > $(2)
+	echo ".set noreorder" >> $(2)
+	echo ".section .rodata.\"$(3)\",\"a\",@progbits" >> $(2)
+	echo ".align 4" >> $(2)
 	echo ".global $(3)" >> $(2)
 	echo ".type $(3), @object" >> $(2)
 	echo "$(3):" >> $(2)
