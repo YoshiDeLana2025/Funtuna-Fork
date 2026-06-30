@@ -5,13 +5,12 @@ on:
 jobs:
   Repack_and_Release:
     runs-on: ubuntu-latest
-    container: ps2dev/ps2dev:v1.2.0
+    container: ps2dev/ps2dev:v2.0.0
     steps:
     
     - name: Install dependencies
       run: |
         apk add build-base git zip p7zip
-        apk add --upgrade musl libc-dev
 
     - name: checkout code for release
       uses: actions/checkout@v1
