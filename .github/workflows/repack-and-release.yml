@@ -11,6 +11,7 @@ jobs:
     - name: Install dependencies
       run: |
         apk add build-base git zip p7zip
+        apk add --no-cache gcompat
 
     - name: checkout code for release
       uses: actions/checkout@v1
