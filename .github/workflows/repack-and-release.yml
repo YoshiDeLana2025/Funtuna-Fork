@@ -15,15 +15,12 @@ jobs:
     - name: checkout code for release
       uses: actions/checkout@v1
 
-    - name: Download and install bin2s from devkitPro
+    - name: Install bin2s
       run: |
-        mkdir -p bin2s_build && cd bin2s_build
-        curl -sSL https://raw.githubusercontent.com/devkitPro/general-tools/master/bin2s.c -o bin2s.c
-        gcc -O2 bin2s.c -o bin2s
+        cd deps
         chmod +x bin2s
         cp bin2s $PS2DEV/bin/
         cd ..
-        rm -rf bin2s_build
     
     - name: build installer
       run: |
