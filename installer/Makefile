@@ -5,6 +5,9 @@ define bin2s_modern
 	echo ".incbin \"$(1)\"" >> $(2)
 	echo "$(3)_end:" >> $(2)
 	echo ".global $(3)_end" >> $(2)
+	echo ".global size_$(3)" >> $(2)
+	echo "size_$(3):" >> $(2)
+	echo ".word $(3)_end - $(3)" >> $(2)
 endef
 
 EE_BIN = Installer.elf
