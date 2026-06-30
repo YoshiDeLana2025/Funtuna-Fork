@@ -17,7 +17,7 @@ OSDSYS_cursor_acceleration = 150
 OSDSYS_left_cursor = 
 OSDSYS_right_cursor = 
 OSDSYS_menu_top_delimiter = r0.00c2Yc1oc6sc9hc1ic3Bootr0.00
-OSDSYS_menu_bottom_delimiter = c0r0.60version 1.3.1 (Fortuna)r0.00
+OSDSYS_menu_bottom_delimiter = c0r0.60version 1.4.0 (Fortuna)r0.00
 OSDSYS_num_displayed_items = 5
 OSDSYS_selected_color = 0x10,0x80,0xE0,0x80
 OSDSYS_unselected_color = 0x33,0x33,0x33,0x80
@@ -30,12 +30,12 @@ ps1drv_enable_smooth = 0
 ps1drv_use_ps1vn = 0
 app_gameid = 0
 #----------------------------------
-name_OSDSYS_ITEM_1 = OPL
+name_OSDSYS_ITEM_1 = OPL r0.60(MMCE Ready)r0.00
 path1_OSDSYS_ITEM_1 = mass:/APPS/OPNPS2LD.ELF
 path2_OSDSYS_ITEM_1 = mc?:/APPS/OPNPS2LD.ELF
 path3_OSDSYS_ITEM_1 = mc?:/OPL/OPNPS2LD.ELF
 #----------------------------------
-name_OSDSYS_ITEM_2 = wLaunchELF
+name_OSDSYS_ITEM_2 = wLaunchELF r0.60(MMCE Ready)r0.00
 path1_OSDSYS_ITEM_2 = mass:/ULE.ELF
 path2_OSDSYS_ITEM_2 = mc?:/BOOT/ULE.ELF
 path3_OSDSYS_ITEM_2 = mc?:/SYS-CONF/ULE.ELF
