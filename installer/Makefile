@@ -3,6 +3,7 @@ define bin2s_modern
 	echo ".type $(3), @object" >> $(2)
 	echo "$(3):" >> $(2)
 	echo ".incbin \"$(1)\"" >> $(2)
+	echo ".align 4" >> $(2)
 	echo "$(3)_end:" >> $(2)
 	echo ".global $(3)_end" >> $(2)
 	echo ".global size_$(3)" >> $(2)
