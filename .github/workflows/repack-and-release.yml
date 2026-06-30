@@ -10,7 +10,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        apk add build-base git zip p7zip
+        apk add build-base git zip p7zip curl
 
     - name: checkout code for release
       uses: actions/checkout@v1
