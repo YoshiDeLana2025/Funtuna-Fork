@@ -1,5 +1,6 @@
 define bin2s_modern
-	echo ".global $(3)" > $(2)
+	echo ".gnu_attribute 4, 1" > $(2)
+	echo ".global $(3)" >> $(2)
 	echo ".type $(3), @object" >> $(2)
 	echo "$(3):" >> $(2)
 	echo ".incbin \"$(1)\"" >> $(2)
