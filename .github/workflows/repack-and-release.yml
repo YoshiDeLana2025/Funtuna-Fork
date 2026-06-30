@@ -8,13 +8,6 @@ jobs:
     container: ps2dev/ps2dev:v2.0.0
     steps:
     
-    - name: Install dependencies
-      run: |
-        apk add build-base git zip p7zip curl
-
-    - name: checkout code for release
-      uses: actions/checkout@v1
-
     - name: Install bin2s
       run: |
         cd deps
@@ -22,6 +15,17 @@ jobs:
         cp bin2s /usr/local/ps2dev/ps2sdk/bin/bin2s
         chmod +x /usr/local/ps2dev/ps2sdk/bin/bin2s
         cd ..
+    
+    - name: Install dependencies
+      run: |
+        apk add build-base git zip p7zip curl
+
+    
+    
+    - name: checkout code for release
+      uses: actions/checkout@v1
+
+    
     
     - name: build installer
       run: |
