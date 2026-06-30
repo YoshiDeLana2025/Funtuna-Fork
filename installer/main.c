@@ -512,23 +512,18 @@ static int install(int mcport, int icon_variant) {
     return 6;
   }
   scr_printf("\t\tYoshiBoot Configuration\n");
-  retorno = write_embed_replace(&YOSHCONF_CNF, size_YOSHCONF_CNF, "SYS-CONF",
-                                "OSDMENU.CNF", mcport);
-  if (retorno < 0) {
-    return 6;
-  }
-  retorno = write_embed_replace(&YOSHCONF_ELF, size_YOSHCONF_ELF, "SYS-CONF",
-                                "YOSHCONF.ELF", mcport);
-  if (retorno < 0) {
-    return 6;
-  }
-  retorno = write_embed_replace(&yoshconf_icn, size_yoshconf_icn, "SYS-CONF",
-                                "yoshconf.icn", mcport);
-  if (retorno < 0) {
-    return 6;
-  }
   retorno = write_embed_replace(&yoshconf_sys, size_yoshconf_sys, "SYS-CONF",
                                 "icon.sys", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&ule_cnf, size_ule_cnf, "SYS-CONF",
+                                "LAUNCHELF.CNF", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&YOSHCONF_CNF, size_YOSHCONF_CNF, "SYS-CONF",
+                                "OSDMENU.CNF", mcport);
   if (retorno < 0) {
     return 6;
   }
@@ -542,25 +537,20 @@ static int install(int mcport, int icon_variant) {
   if (retorno < 0) {
     return 6;
   }
-  retorno = write_embed_replace(&ule_cnf, size_ule_cnf, "SYS-CONF",
-                                "LAUNCHELF.CNF", mcport);
+  retorno = write_embed_replace(&YOSHCONF_ELF, size_YOSHCONF_ELF, "SYS-CONF",
+                                "YOSHCONF.ELF", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&yoshconf_icn, size_yoshconf_icn, "SYS-CONF",
+                                "yoshconf.icn", mcport);
   if (retorno < 0) {
     return 6;
   }
   /// FUNTUNA&APPS
   scr_printf("\t\tOPL\n");
-  retorno = write_embed_replace(&opl_elf, size_opl_elf, "OPL", "OPNPS2LD.ELF",
-                                mcport);
-  if (retorno < 0) {
-    return 6;
-  }
-  retorno =
-      write_embed_replace(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
-  if (retorno < 0) {
-    return 6;
-  }
-  retorno =
-      write_embed_replace(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
+  retorno = write_embed_replace(&opl_dualshock, size_opl_dualshock, "OPL",
+                                "conf_game.cfg", mcport);
   if (retorno < 0) {
     return 6;
   }
@@ -569,20 +559,25 @@ static int install(int mcport, int icon_variant) {
   if (retorno < 0) {
     return 6;
   }
-  retorno = write_embed_replace(&opl_dualshock, size_opl_dualshock, "OPL",
-                                "conf_game.cfg", mcport);
+  retorno =
+      write_embed_replace(&opl_sys, size_opl_sys, "OPL", "icon.sys", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno =
+      write_embed_replace(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&opl_elf, size_opl_elf, "OPL", "OPNPS2LD.ELF",
+                                mcport);
   if (retorno < 0) {
     return 6;
   }
 
   scr_printf("\t\tPOPStarter exFAT\n");
-  retorno = write_embed_replace(&pops_usbd, size_pops_usbd, "POPSTARTER",
-                                "usbd.irx", mcport);
-  if (retorno < 0) {
-    return 6;
-  }
-  retorno = write_embed_replace(&pops_usbhdfsd, size_pops_usbhdfsd,
-                                "POPSTARTER", "usbhdfsd.irx", mcport);
+  retorno = write_embed_replace(&pops_sys, size_pops_sys, "POPSTARTER",
+                                "icon.sys", mcport);
   if (retorno < 0) {
     return 6;
   }
@@ -591,8 +586,13 @@ static int install(int mcport, int icon_variant) {
   if (retorno < 0) {
     return 6;
   }
-  retorno = write_embed_replace(&pops_sys, size_pops_sys, "POPSTARTER",
-                                "icon.sys", mcport);
+  retorno = write_embed_replace(&pops_usbd, size_pops_usbd, "POPSTARTER",
+                                "usbd.irx", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&pops_usbhdfsd, size_pops_usbhdfsd,
+                                "POPSTARTER", "usbhdfsd.irx", mcport);
   if (retorno < 0) {
     return 6;
   }

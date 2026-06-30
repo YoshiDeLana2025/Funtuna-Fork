@@ -39,60 +39,6 @@ yoshboot_sys.s:
 	@$(call bin2s_modern,INSTALLER_CONTENTS/BOOT/icon.sys,yoshboot_sys.s,yoshboot_sys)
 # /BOOT
 
-# SYS-CONF
-YOSHCONF_CNF.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/OSDMENU.CNF,YOSHCONF_CNF.s,YOSHCONF_CNF)
-
-YOSHCONF_ELF.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/YOSHCONF.ELF,YOSHCONF_ELF.s,YOSHCONF_ELF)
-
-yoshconf_icn.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/yoshconf.icn,yoshconf_icn.s,yoshconf_icn)
-
-yoshconf_sys.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/icon.sys,yoshconf_sys.s,yoshconf_sys)
-
-ule_elf.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/ULE.ELF,ule_elf.s,ule_elf)
-
-ule_bg.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/ULEBG.JPG,ule_bg.s,ule_bg)
-	
-ule_cnf.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/LAUNCHELF.CNF,ule_cnf.s,ule_cnf)
-# /SYS-CONF
-
-# OPL
-opl_elf.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/OPNPS2LD.ELF,opl_elf.s,opl_elf)
-
-opl_icn.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/opl.icn,opl_icn.s,opl_icn)
-	
-opl_sys.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/icon.sys,opl_sys.s,opl_sys)
-
-opl_cfg.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_opl.cfg,opl_cfg.s,opl_cfg)
-	
-opl_dualshock.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_game.cfg,opl_dualshock.s,opl_dualshock)
-# /OPL
-
-# POPSTARTER
-pops_icn.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/pops.icn,pops_icn.s,pops_icn)
-
-pops_sys.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/icon.sys,pops_sys.s,pops_sys)
-
-pops_usbd.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/usbd.irx,pops_usbd.s,pops_usbd)
-
-pops_usbhdfsd.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/usbhdfsd.irx,pops_usbhdfsd.s,pops_usbhdfsd)
-# /POPSTARTER
-
 # EXPLOIT
 exploit_bin.s:
 	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/exploit.bin,exploit_bin.s,exploit_bin)
@@ -109,6 +55,61 @@ OpenTuna_FAT-170.s:
 exploit_sys.s:
 	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/exploit.sys,exploit_sys.s,exploit_sys)
 # /EXPLOIT
+
+# OPL
+opl_dualshock.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_game.cfg,opl_dualshock.s,opl_dualshock)
+
+opl_cfg.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_opl.cfg,opl_cfg.s,opl_cfg)
+	
+opl_sys.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/icon.sys,opl_sys.s,opl_sys)
+
+opl_icn.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/opl.icn,opl_icn.s,opl_icn)
+	
+opl_elf.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/OPNPS2LD.ELF,opl_elf.s,opl_elf)
+
+# /OPL
+
+# POPSTARTER
+pops_sys.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/icon.sys,pops_sys.s,pops_sys)
+
+pops_icn.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/pops.icn,pops_icn.s,pops_icn)
+
+pops_usbd.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/usbd.irx,pops_usbd.s,pops_usbd)
+
+pops_usbhdfsd.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/POPSTARTER/usbhdfsd.irx,pops_usbhdfsd.s,pops_usbhdfsd)
+# /POPSTARTER
+
+# SYS-CONF
+yoshconf_sys.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/icon.sys,yoshconf_sys.s,yoshconf_sys)
+
+ule_cnf.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/LAUNCHELF.CNF,ule_cnf.s,ule_cnf)
+
+YOSHCONF_CNF.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/OSDMENU.CNF,YOSHCONF_CNF.s,YOSHCONF_CNF)
+
+ule_elf.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/ULE.ELF,ule_elf.s,ule_elf)
+
+ule_bg.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/ULEBG.JPG,ule_bg.s,ule_bg)
+	
+YOSHCONF_ELF.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/YOSHCONF.ELF,YOSHCONF_ELF.s,YOSHCONF_ELF)
+
+yoshconf_icn.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/SYS-CONF/yoshconf.icn,yoshconf_icn.s,yoshconf_icn)
+# /SYS-CONF
 clean:
 	@echo cleaning...
 	@echo ...objs and $(EE_BIN_PACKED) $(EE_BIN_STRIPPED) $(EE_BIN)
