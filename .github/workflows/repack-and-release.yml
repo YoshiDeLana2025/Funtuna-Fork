@@ -19,7 +19,8 @@ jobs:
       run: |
         cd deps
         chmod +x bin2s
-        cp bin2s $PS2DEV/bin/
+        cp bin2s /usr/local/ps2dev/ps2sdk/bin/bin2s
+        chmod +x /usr/local/ps2dev/ps2sdk/bin/bin2s
         cd ..
     
     - name: build installer
