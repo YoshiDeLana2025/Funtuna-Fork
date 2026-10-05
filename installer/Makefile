@@ -60,6 +60,18 @@ exploit_sys.s:
 	@$(call bin2s_modern,INSTALLER_CONTENTS/ENTRYPOINT/exploit.sys,exploit_sys.s,exploit_sys)
 # /EXPLOIT
 
+# APPS
+apps_sys.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/APPS/icon.sys,apps_sys.s,apps_sys)
+
+apps_icn.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/APPS/apps.icn,apps_icn.s,apps_icn)
+	
+opl_elf.s:
+	@$(call bin2s_modern,INSTALLER_CONTENTS/APPS/OPNPS2LD.ELF,opl_elf.s,opl_elf)
+
+# /APPS
+
 # OPL
 opl_dualshock.s:
 	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/conf_game.cfg,opl_dualshock.s,opl_dualshock)
@@ -72,10 +84,6 @@ opl_sys.s:
 
 opl_icn.s:
 	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/opl.icn,opl_icn.s,opl_icn)
-	
-opl_elf.s:
-	@$(call bin2s_modern,INSTALLER_CONTENTS/OPL/OPNPS2LD.ELF,opl_elf.s,opl_elf)
-
 # /OPL
 
 # POPSTARTER

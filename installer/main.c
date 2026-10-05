@@ -52,14 +52,20 @@ extern int size_ule_cnf;
 extern u8 ule_bg[];
 extern int size_ule_bg;
 //----------------------------------------//
+extern u8 apps_icn[];
+extern int size_apps_icn;
+//----------------------------------------//
+extern u8 apps_sys[];
+extern int size_apps_sys;
+//----------------------------------------//
+extern u8 opl_elf[];
+extern int size_opl_elf;
+//----------------------------------------//
 extern u8 opl_icn[];
 extern int size_opl_icn;
 //----------------------------------------//
 extern u8 opl_sys[];
 extern int size_opl_sys;
-//----------------------------------------//
-extern u8 opl_elf[];
-extern int size_opl_elf;
 //----------------------------------------//
 extern u8 opl_cfg[];
 extern int size_opl_cfg;
@@ -424,6 +430,9 @@ static int install(int mcport, int icon_variant) {
   scr_printf("\t\tSYS-CONF\n");
   ret = mcMkDir(mcport, 0, "SYS-CONF");
   mcSync(0, NULL, &ret);
+  scr_printf("\t\tAPPS\n");
+  ret = mcMkDir(mcport, 0, "APPS");
+  mcSync(0, NULL, &ret);
   scr_printf("\t\tOPL\n");
   ret = mcMkDir(mcport, 0, "OPL");
   mcSync(0, NULL, &ret);
@@ -548,6 +557,23 @@ static int install(int mcport, int icon_variant) {
     return 6;
   }
   /// FUNTUNA&APPS
+  scr_printf("\t\tApps\n");
+  retorno =
+      write_embed_replace(&apps_icn, size_apps_icn, "APPS", "apps.icn", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno =
+      write_embed_replace(&apps_sys, size_apps_sys, "APPS", "icon.sys", mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  retorno = write_embed_replace(&opl_elf, size_opl_elf, "APPS", "OPNPS2LD.ELF",
+                                mcport);
+  if (retorno < 0) {
+    return 6;
+  }
+  /// OPL
   scr_printf("\t\tOPL\n");
   retorno = write_embed_replace(&opl_dualshock, size_opl_dualshock, "OPL",
                                 "conf_game.cfg", mcport);
@@ -566,11 +592,6 @@ static int install(int mcport, int icon_variant) {
   }
   retorno =
       write_embed_replace(&opl_icn, size_opl_icn, "OPL", "opl.icn", mcport);
-  if (retorno < 0) {
-    return 6;
-  }
-  retorno = write_embed_replace(&opl_elf, size_opl_elf, "OPL", "OPNPS2LD.ELF",
-                                mcport);
   if (retorno < 0) {
     return 6;
   }
